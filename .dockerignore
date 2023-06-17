@@ -1,0 +1,5 @@
+src/node_modules/
+.docker/
+.dockerignore
+src/npm-debug.log
+src/dist
