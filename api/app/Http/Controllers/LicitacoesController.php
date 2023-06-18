@@ -18,7 +18,7 @@ class LicitacoesController extends Controller
     {
         $licitacoes = $this->model
             ->where('licitacoes.status', 1)
-            ->join('empresas', 'licitacoes.empresa', '=', 'cidades.id')
+            ->join('empresas', 'licitacoes.empresa', '=', 'empresas.id')
             ->join('modalidades', 'licitacoes.modalidade', '=', 'modalidades.id')
             ->orderByDesc('licitacoes.id')
             ->get();
