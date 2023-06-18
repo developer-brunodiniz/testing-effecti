@@ -4,8 +4,8 @@ networks:
   effecti:
 
 services:
-  db:
-    image: postgres:latest
+  postgres:
+    image: postgres:15.3
     container_name: postgres
     restart: always
     ports:
@@ -14,32 +14,60 @@ services:
       - "./.docker/postgres:/var/lib/postgresql/data"
     environment:
       POSTGRES_DB: effecti
+      POSTGRES_USER: usereffecti
       POSTGRES_PASSWORD: 1233219
+      POSTGRES_PORT: 5342
       POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - effecti
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-app
+    restart: always
+    tty: true
+    ports:
+      - "3603:3306"
+    volumes:
+      - "./.docker/mysql:/var/lib/mysql"
+    environment:
+      MYSQL_DATABASE: effecti
+      MYSQL_USER: usereffecti
+      MYSQL_PASSWORD: 1233219
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      SERVICE_TAGS: dev
+      SERVICE_MYSQL: mysql
+    depends_on:
+      - postgres
+    networks:
+      - effecti
   
-  cache:
+  redis:
     image: redis:alpine
     container_name: redis
     restart: always
     ports:
       - "6397:6379"
     depends_on:
-      - db
+      - postgres
+      - mysql
     networks:
       - effecti
 
-  api:
+  php:
     build: ./.docker/php
     container_name: php
     volumes:
       - ./api:/var/www
     depends_on:
-      - db
-      - cache
+      - postgres
+      - mysql
+      - redis
     networks:
       - effecti  
 
-  server:
+  nginx:
     build: ./.docker/nginx
     container_name: nginx
     restart: always
@@ -48,13 +76,14 @@ services:
     volumes:
       - ./api:/var/www
     depends_on:
-      - db
-      - cache
-      - api
+      - postgres
+      - mysql
+      - redis
+      - php
     networks:
       - effecti  
 
-  app:
+  node:
     build:
       context: .
       dockerfile: Appfile
@@ -65,15 +94,12 @@ services:
     volumes:
       - ./:/app
     depends_on:
-      - db
-      - cache
-      - api
-      - server
+      - postgres
+      - mysql
+      - redis
+      - php
+      - nginx
     environment:
       NODE_ENV: development
     networks:
       - effecti
-
-volumes:
-  postgres:
-    driver: local
