@@ -2,6 +2,7 @@
 node_modules
 /dist
 .docker/postgres
+.docker/mysql
 
 # local env files
 .env.local
