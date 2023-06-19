@@ -26,7 +26,7 @@ docker-compose up -d
 ou
 
 ```bash
-docker-compose up -d --build --remove-orphans --fore-recreate
+docker-compose up -d --build --remove-orphans --force-recreate
 ```
 
 ou
