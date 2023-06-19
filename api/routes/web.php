@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('api/v1')->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
     Route::get('status', [StatusController::class, 'index']);
     Route::put('status/atualizar/{id?}', [StatusController::class, 'update'])
         ->where('id', '[0-9]+');
