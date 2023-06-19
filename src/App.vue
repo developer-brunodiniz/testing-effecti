@@ -9,7 +9,12 @@
             <router-view />
           </v-responsive>
         </v-container>
-        <footer />
+        <v-footer class="d-flex flex-column">
+          <div class="px-4 py-2 bg-black text-center w-100">
+            {{ new Date().getFullYear() }} —
+            <strong>Effecti - Bruno Diniz</strong>
+          </div>
+        </v-footer>
       </v-main>
     </v-layout>
   </v-card>
@@ -18,10 +23,9 @@
 <script>
 import NavigationDrawer from './components/Layout/NavigationDrawer.vue'
 import AppBar from './components/Layout/AppBar.vue'
-import Footer from './components/Layout/Footer.vue'
 
 export default {
-  components: { NavigationDrawer, AppBar, Footer }
+  components: { NavigationDrawer, AppBar }
 }
 </script>
 

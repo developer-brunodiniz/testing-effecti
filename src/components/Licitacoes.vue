@@ -167,6 +167,7 @@ export default {
         .post(`${config.apiURL}/licitacao/criar`, this.store)
         .then((response) => {
           this.licitacoes.push(response.data)
+          this.get()
           this.dialog = false
         })
     },

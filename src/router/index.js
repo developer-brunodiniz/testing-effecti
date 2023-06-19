@@ -22,13 +22,8 @@ const routes = [
         component: () => import('@/views/Modalidades/Index.vue')
       },
       {
-        path: '/licitacoes',
-        name: 'Listar Licitações',
-        component: () => import('@/views/Licitacoes/Index.vue')
-      },
-      {
         path: '/',
-        name: 'Página inicial',
+        name: 'Listar Licitações',
         component: () => import('@/views/Licitacoes/Index.vue')
       }
     ]

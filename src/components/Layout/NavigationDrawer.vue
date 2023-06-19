@@ -22,11 +22,10 @@
 export default {
   data: () => ({
     menus: [
-      { title: 'Página Inicial', icon: 'mdi-home', link: '/' },
       {
         title: 'Licitações',
         icon: 'mdi mdi-application-edit-outline',
-        link: '/licitacoes'
+        link: '/'
       },
       {
         title: 'Modalidades',
