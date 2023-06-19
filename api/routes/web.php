@@ -17,34 +17,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('api/v1')->group(function () {
+    Route::get('status', [StatusController::class, 'index']);
+    Route::put('status/atualizar/{id?}', [StatusController::class, 'update'])
+        ->where('id', '[0-9]+');
+    Route::post('status/criar', [StatusController::class, 'insert']);
+    Route::match(['get', 'delete'], 'status/deletar/{id}', [StatusController::class, 'delete'])
+        ->where('id', '[0-9]+');
+
+    Route::get('empresas', [EmpresasController::class, 'index']);
+    Route::put('empresa/atualizar/{id?}', [EmpresasController::class, 'update'])
+        ->where('id', '[0-9]+');
+    Route::post('empresa/criar', [EmpresasController::class, 'insert']);
+    Route::put('empresa/deletar/{id}', [EmpresasController::class, 'delete'])
+        ->where('id', '[0-9]+');
+
+    Route::get('modalidades', [ModalidadesController::class, 'index']);
+    Route::put('modalidade/atualizar/{id?}', [ModalidadesController::class, 'update'])
+        ->where('id', '[0-9]+');
+    Route::post('modalidade/criar', [ModalidadesController::class, 'insert']);
+    Route::put('modalidade/deletar/{id}', [ModalidadesController::class, 'delete'])
+        ->where('id', '[0-9]+');
+
+    Route::get('licitacoes', [LicitacoesController::class, 'index']);
+    Route::put('licitacao/atualizar/{id?}', [LicitacoesController::class, 'update'])
+        ->where('id', '[0-9]+');
+    Route::post('licitacao/criar', [LicitacoesController::class, 'insert']);
+    Route::put('licitacao/deletar/{id}', [LicitacoesController::class, 'delete'])
+        ->where('id', '[0-9]+');
 });
-
-Route::get('status', [StatusController::class, 'index']);
-Route::put('status/atualizar/{id?}', [StatusController::class, 'put'])
-    ->where('id', '[0-9]+');
-Route::post('status/criar', [StatusController::class, 'post']);
-Route::match(['get', 'delete'], 'status/deletar/{id}', [StatusController::class, 'delete'])
-    ->where('id', '[0-9]+');
-
-Route::get('empresas', [EmpresasController::class, 'index']);
-Route::put('empresa/atualizar/{id?}', [EmpresasController::class, 'put'])
-    ->where('id', '[0-9]+');
-Route::post('empresa/criar', [EmpresasController::class, 'post']);
-Route::match(['get', 'delete'], 'empresa/deletar/{id}', [EmpresasController::class, 'delete'])
-    ->where('id', '[0-9]+');
-
-Route::get('modalidades', [ModalidadesController::class, 'index']);
-Route::put('modalidade/atualizar/{id?}', [ModalidadesController::class, 'put'])
-    ->where('id', '[0-9]+');
-Route::post('modalidade/criar', [ModalidadesController::class, 'post']);
-Route::match(['get', 'delete'], 'modalidade/deletar/{id}', [ModalidadesController::class, 'delete'])
-    ->where('id', '[0-9]+');
-
-Route::get('licitacoes', [LicitacoesController::class, 'index']);
-Route::put('licitacoes/atualizar/{id?}', [LicitacoesController::class, 'put'])
-    ->where('id', '[0-9]+');
-Route::post('licitacoes/criar', [LicitacoesController::class, 'post']);
-Route::match(['get', 'delete'], 'licitacoes/deletar/{id}', [LicitacoesController::class, 'delete'])
-    ->where('id', '[0-9]+');

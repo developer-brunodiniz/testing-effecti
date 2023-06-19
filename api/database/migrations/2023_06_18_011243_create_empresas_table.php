@@ -18,15 +18,13 @@ return new class extends Migration
 
             $table->increments('id')->unsigned();
             $table->integer('status')->unsigned();
-            $table->bigInteger('cnpj')->nullable(true);
+            $table->string('cnpj', 18)->nullable(true);
             $table->string('name_fantasy', 50);
             $table->string('corporate_reason', 80)->nullable(true);
             $table->string('address', 255)->nullable(true);
-            $table->string('cell_phone', 14)->nullable(true);
-            $table->string('email', 45)->nullable(true);
+            $table->string('cell_phone', 15)->nullable(true);
+            $table->string('email', 45);
             $table->timestamps();
-            // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))->nullable(true);
-            // $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->nullable(true);
 
             $table->foreign('status')->references('id')->on('status');
         });

@@ -17,6 +17,7 @@ class LicitacoesController extends Controller
     public function index(Request $request)
     {
         $licitacoes = $this->model
+            ->select('licitacoes.id', 'licitacoes.description', 'modalidades.id as modalidade_id', 'modalidades.description as modalidade_description', 'empresas.id as empresa_id', 'empresas.name_fantasy as empresa_nomefantasia')
             ->where('licitacoes.status', 1)
             ->join('empresas', 'licitacoes.empresa', '=', 'empresas.id')
             ->join('modalidades', 'licitacoes.modalidade', '=', 'modalidades.id')
@@ -26,7 +27,7 @@ class LicitacoesController extends Controller
         return $licitacoes;
     }
 
-    public function post(Request $request)
+    public function insert(Request $request)
     {
         try {
             $params = [
@@ -43,14 +44,21 @@ class LicitacoesController extends Controller
         }
     }
 
-    public function put(Request $request)
+    public function update(Request $request)
     {
         try {
             $update = $this->model::where('status', '=', 1)
                 ->findOrFail($request->id);
 
+            $params = [
+                'id' => $request->id,
+                'empresa' => $request->empresa,
+                'modalidade' => $request->modalidade,
+                'description' => $request->description
+            ];
+
             return $update
-                ->update($request->all());
+                ->update($params);
         } catch (\Exception $e) {
 
             return $e->getMessage();

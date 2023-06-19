@@ -24,7 +24,7 @@ class ModalidadesController extends Controller
         return $modalidades;
     }
 
-    public function post(Request $request)
+    public function insert(Request $request)
     {
         try {
             $params = [
@@ -39,7 +39,7 @@ class ModalidadesController extends Controller
         }
     }
 
-    public function put(Request $request)
+    public function update(Request $request)
     {
         try {
             $update = $this->model::where('status', '=', 1)

@@ -23,11 +23,10 @@ class StatusController extends Controller
         return $status;
     }
 
-    public function post(Request $request)
+    public function insert(Request $request)
     {
         try {
             $params = [
-                'status' => 1,
                 'description' => $request->description
             ];
 
@@ -38,7 +37,7 @@ class StatusController extends Controller
         }
     }
 
-    public function put(Request $request)
+    public function update(Request $request)
     {
         try {
             $update = $this->model::findOrFail($request->id);

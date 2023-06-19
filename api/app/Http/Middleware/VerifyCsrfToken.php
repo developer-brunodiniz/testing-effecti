@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'stripe/*',
+        'http://127.0.0.1:8089/api/v1/*',
     ];
 }

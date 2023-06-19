@@ -19,8 +19,6 @@ return new class extends Migration
             $table->increments('id')->unsigned();
             $table->string('description', 15);
             $table->timestamps();
-            // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))->nullable(true);
-            // $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->nullable(true);
         });
     }
 

@@ -24,7 +24,7 @@ class EmpresasController extends Controller
         return $empresas;
     }
 
-    public function post(Request $request)
+    public function insert(Request $request)
     {
         try {
             $params = [
@@ -44,14 +44,24 @@ class EmpresasController extends Controller
         }
     }
 
-    public function put(Request $request)
+    public function update(Request $request)
     {
         try {
             $update = $this->model::where('status', '=', 1)
                 ->findOrFail($request->id);
 
+            $params = [
+                'id' => $request->id,
+                'cnpj' => $request->cnpj,
+                'name_fantasy' => $request->name_fantasy,
+                'corporate_reason' => $request->corporate_reason,
+                'address' => $request->address,
+                'cell_phone' => $request->cell_phone,
+                'email' => $request->email
+            ];
+
             return $update
-                ->update($request->all());
+                ->update($params);
         } catch (\Exception $e) {
 
             return $e->getMessage();

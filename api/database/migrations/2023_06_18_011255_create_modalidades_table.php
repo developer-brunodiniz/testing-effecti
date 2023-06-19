@@ -20,8 +20,6 @@ return new class extends Migration
             $table->integer('status')->unsigned();
             $table->string('description', 50);
             $table->timestamps();
-            // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))->nullable(true);
-            // $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->nullable(true);
 
             $table->foreign('status')->references('id')->on('status');
         });
