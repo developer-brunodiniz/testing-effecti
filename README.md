@@ -97,4 +97,4 @@ docker rmi $(docker images -q) -f
 
 ---
 
-**OBS: Temos algumas possibilidades de melhorias, como, separação de componentes para reutilização, utilização de props para passar valor entre os componentes e a documentação da api utilizando o swagger.**
+**OBS: Temos algumas possibilidades de melhorias, como, separação de componentes para reutilização, utilização de props para passar valor entre os componentes, alertas de confirmação e questionamento para funcionalidades do CRUD e a documentação da api utilizando o swagger.**
