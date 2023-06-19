@@ -7,8 +7,8 @@ RUN npm install -g http-server
 WORKDIR /app
 COPY package*.json ./
 ENV NODE_ENV=development
-RUN npm install
 COPY . .
+RUN npm install
 RUN npm run build
 
 # serve app in development
